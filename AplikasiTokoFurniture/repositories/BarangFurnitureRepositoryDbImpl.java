@@ -4,8 +4,8 @@ import AplikasiTokoFurniture.entities.BarangFurniture;
 
 import java.util.List;
 
-public class BarangFurnitureRepositoryImpl implements BarangFurnitureRepository {
-    private BarangFurnitureRepositoryDbImpl dbImpl = new BarangFurnitureRepositoryDbImpl();
+public class BarangFurnitureRepositoryDbImpl implements BarangFurnitureRepository {
+    private final BarangFurnitureRepositoryDbImpl dbImpl = new BarangFurnitureRepositoryDbImpl();
 
     @Override
     public void save(BarangFurniture barangFurniture) {
