@@ -5,16 +5,35 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String URL = "jdbc:mysql://localhost:3306/furniture_store";
-    private static final String USER = "root";
-    private static final String PASSWORD = "password";
+    private final String dbName;
+    private final String userName;
+    private final String password;
+    private final String host;
+    private final String port;
+    private Connection connection;
 
-    public static Connection getConnection() throws SQLException {
+
+    public Database(String dbName, String userName, String password, String host, String port) {
+        this.dbName = dbName;
+        this.userName = userName;
+        this.password = password;
+        this.host = host;
+        this.port = port;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setup() {
+        String mysqlConnUrlTemplate = "jdbc:mysql://%s:%s/%s";
         try {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            throw new SQLException("Database connection error", e);
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(String.format(mysqlConnUrlTemplate, host, port, dbName), userName, password);
+            System.out.println("Database connected!");
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
-

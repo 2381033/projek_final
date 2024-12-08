@@ -1,13 +1,16 @@
 package AplikasiTokoFurniture.services;
 
 import AplikasiTokoFurniture.entities.BarangFurniture;
-import AplikasiTokoFurniture.repositories.BarangFurnitureRepository;
-import AplikasiTokoFurniture.repositories.BarangFurnitureRepositoryImpl;
+import AplikasiTokoFurniture.repositories.BarangFurnitureRepositoryDbImpl;
 
 import java.util.List;
 
 public class BarangFurnitureServiceImpl implements BarangFurnitureService {
-    private BarangFurnitureRepository repository = new BarangFurnitureRepositoryImpl();
+    private BarangFurnitureRepositoryDbImpl repository;
+
+    public BarangFurnitureServiceImpl(BarangFurnitureRepositoryDbImpl repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void addBarang(BarangFurniture barangFurniture) {
